@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -26,14 +27,24 @@ import javax.swing.plaf.PanelUI;
  * @author Rundorn Music
  */
 public class MyGui {
-
+    
     public static void main(String[] args) {
-         MyFrame mf =new MyFrame();
+        
+        int money;
+        Money m = new Money();
+        int moneyTotal ;
+        moneyTotal = m.setMoney();
+        MyFrame mf =new MyFrame();
+        money = Integer.parseInt(mf.txt1.getText());
+        moneyTotal = money + moneyTotal;
          mf.btn.addActionListener(new ActionListener() {
-
+             
              @Override
              public void actionPerformed(ActionEvent e) {
-                 mf.txt2.setText("20 Bath");
+                 if(mf.rbtn1.isSelected()){
+//                    moneyTotal = money + moneyTotal;
+                    mf.txt1.setText(Integer.toString(moneyTotal));
+                 }
              }
          });
         
@@ -46,14 +57,15 @@ class MyFrame extends JFrame{
     Panel pnl2 = new Panel();
     Label lbl1 = new Label();
     Label lbl2 = new Label();
-    Label lbl3 = new Label();
+    JLabel lbl3 = new JLabel();
     ButtonGroup btnG = new ButtonGroup();
-    JRadioButton rbtn1 = new JRadioButton("Bensin");
-    JRadioButton rbtn2 = new JRadioButton("Sohol95");
-    JRadioButton rbtn3 = new JRadioButton("Sohol E20");
+    JRadioButton rbtn1 = new JRadioButton("Deposit money");
+    JRadioButton rbtn2 = new JRadioButton("Withdraw money");
+   
     JTextField txt1 = new JTextField();
     JTextField txt2 = new JTextField();
     JButton btn = new JButton("UPDATE");
+    JButton btn2 = new JButton("CHECK MONEY");
     
     public MyFrame(){
       
@@ -68,38 +80,27 @@ class MyFrame extends JFrame{
       pnl.setLayout(null);
       this.add(pnl);
       
-      lbl1.setBounds(10, 10, 110, 30);
-      lbl1.setText("Kind of fill the tank");
-      pnl.add(lbl1);
       
-      rbtn1.setBounds(10, 45, 70, 50);
+      rbtn1.setBounds(10, 10, 110, 50);
       rbtn1.setBackground(Color.lightGray);
       pnl.add(rbtn1);
       
-      rbtn2.setBounds(150, 45, 85, 50);
+      rbtn2.setBounds(10, 45, 130, 50);
       rbtn2.setBackground(Color.lightGray);
       pnl.add(rbtn2);
       
-      rbtn3.setBounds(300, 45, 85, 50);
-      rbtn3.setBackground(Color.lightGray);
-      pnl.add(rbtn3);
+
       
-      btnG.add(rbtn1);
-      btnG.add(rbtn2);
-      btnG.add(rbtn3);
-      
-      lbl2.setBounds(10, 105, 200, 30);
-      lbl2.setText("How many liters do you want to fill?");
-      pnl.add(lbl2);
-      
-      txt1.setBounds(10, 150, 230, 30);
+      txt1.setBounds(10, 100, 230, 30);
       txt1.setHorizontalAlignment(SwingConstants.CENTER);
       
       pnl.add(txt1);
       
       
-      btn.setBounds(260, 150, 230, 30);
+      btn.setBounds(10, 150, 230, 30);
       pnl.add(btn);
+      btn2.setBounds(260, 150, 230, 30);
+      pnl.add(btn2);
       
       pnl2.setBounds(10, 220, 480, 50);
       pnl2.setBackground(Color.GRAY);
@@ -107,8 +108,9 @@ class MyFrame extends JFrame{
       
       
       lbl3.setBounds(10, 10, 220, 20);
-      lbl3.setText("The money you have to pay is equal to");
-      lbl3.setBackground(Color.WHITE);
+      lbl3.setText("Total");
+      lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+      lbl3.setBackground(Color.lightGray);
       pnl2.add(lbl3);
       
       txt2.setBounds(250, 10, 220, 20);
@@ -116,10 +118,19 @@ class MyFrame extends JFrame{
       txt2.setHorizontalAlignment(SwingConstants.CENTER);
       pnl2.setLayout(null);
       pnl2.add(txt2);
-      
+      btnG.add(rbtn1);
+      btnG.add(rbtn2);
       
       
       setVisible(true);
   }
     
+}
+class Money{
+    private int money = 1000;
+    public int setMoney(){
+    return money;
+    
+    }
+
 }
